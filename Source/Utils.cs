@@ -20,6 +20,13 @@ namespace StuffCount
                 : map.listerThings.ThingsOfDef(tDef).Count;
         }
 
+        public static int CountWithStuff(ThingDef tDef, ThingDef sDef, Map map)
+        {
+            return tDef.CountAsResource
+                ? map.resourceCounter.GetCount(tDef)
+                : map.listerThings.ThingsOfDef(tDef).Where(x=>x.Stuff==sDef).Count();
+        }
+
         public static void ShowInfo(ThingDef tDef)
         {
             if (!CanShowInfo(tDef))
@@ -30,6 +37,7 @@ namespace StuffCount
 
             if (tDef.thingClass == typeof(MinifiedThing))
             {
+                //TODO: check inner thing for sculptures and furniture
                 List<ThingDef> list = (from def in DefDatabase<ThingDef>.AllDefs
                                                    where def.minifiedDef == tDef
                                                    select def).ToList();
@@ -47,10 +55,16 @@ namespace StuffCount
 
                 foreach (var sDef in GenStuff.AllowedStuffsFor(tDef))
                 {
+                    int? countWithThisStuff = null;
                     int? stuffCount = null;
-                    if (Find.VisibleMap != null)
-                        stuffCount = Count(sDef, Find.VisibleMap);
-                    string labelCap = sDef.LabelCap + " (" + (stuffCount?.ToString() ?? "?") + ")";
+                    var map = Find.VisibleMap;
+                    if (map!=null)
+                    {
+                        stuffCount = Count(sDef, map);
+                        countWithThisStuff = CountWithStuff(tDef, sDef, map);
+                    }
+                       
+                    string labelCap = $"[{countWithThisStuff.ToString() ?? "?"}] | {sDef.LabelCap} ({stuffCount?.ToString() ?? "?"})";
 
                     list.Add(new FloatMenuOption(labelCap, delegate
                     {
