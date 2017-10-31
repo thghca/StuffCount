@@ -20,13 +20,7 @@ namespace StuffCount
                 : map.listerThings.ThingsOfDef(tDef).Count;
         }
 
-        public static int CountWithStuff(ThingDef tDef, ThingDef sDef, Map map)
-        {
-            return tDef.CountAsResource
-                ? map.resourceCounter.GetCount(tDef)
-                : map.listerThings.ThingsOfDef(tDef).Where(x=>x.Stuff==sDef).Count();
-        }
-
+        
         public static void ShowInfo(ThingDef tDef)
         {
             if (!CanShowInfo(tDef))
@@ -53,15 +47,18 @@ namespace StuffCount
             {
                 List<FloatMenuOption> list = new List<FloatMenuOption>();
 
+                var map = Find.VisibleMap;
+                var allThings = map?.listerThings?.ThingsOfDef(tDef);
+
                 foreach (var sDef in GenStuff.AllowedStuffsFor(tDef))
                 {
                     int? countWithThisStuff = null;
                     int? stuffCount = null;
-                    var map = Find.VisibleMap;
+                    
                     if (map!=null)
                     {
                         stuffCount = Count(sDef, map);
-                        countWithThisStuff = CountWithStuff(tDef, sDef, map);
+                        countWithThisStuff = allThings.Where(x => x.Stuff == sDef).Count();
                     }
                        
                     string labelCap = $"[{countWithThisStuff.ToString() ?? "?"}] | {sDef.LabelCap} ({stuffCount?.ToString() ?? "?"})";
