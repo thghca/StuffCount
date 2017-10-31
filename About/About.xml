@@ -2,7 +2,7 @@
 	<name>StuffCount</name>
 	<author>TGC</author>
 	<targetVersion>0.17.0</targetVersion>
-	<description>
+	<description>v1.1
 Adds counters to thing filters and material select float menu.
 
 Can be added/removed at any time.	

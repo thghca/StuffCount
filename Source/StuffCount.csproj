@@ -36,7 +36,7 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="Assembly-CSharp">
-      <HintPath>..\..\Assembly-CSharp.dll</HintPath>
+      <HintPath>..\..\..\..\Documents\GitHub\Assembly-CSharp.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="System" />
@@ -46,14 +46,17 @@
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
     <Reference Include="UnityEngine">
-      <HintPath>..\..\UnityEngine.dll</HintPath>
+      <HintPath>..\..\..\..\Documents\GitHub\UnityEngine.dll</HintPath>
       <Private>False</Private>
     </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ArchitectSense_Designator_SubCategory_Patch.cs" />
     <Compile Include="Designator_Build_ProcessInput_Patch.cs" />
+    <Compile Include="Dialog_InfoCard_DoWindowContents_Patch.cs" />
     <Compile Include="FloatMenu_get_ColumnWidth_Patch.cs" />
+    <Compile Include="Utils.cs" />
+    <Compile Include="Widgets_InfoCardButton_Patches.cs" />
     <Compile Include="Listing_TreeThingFilter_DoThingDef_Patch.cs" />
     <Compile Include="Main.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

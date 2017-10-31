@@ -2,6 +2,10 @@
 using System;
 using System.Reflection;
 using Verse;
+using System.Collections.Generic;
+using RimWorld;
+using System.Linq;
+using UnityEngine;
 
 namespace StuffCount
 {
@@ -23,15 +27,6 @@ namespace StuffCount
             }
             harmony.PatchAll(Assembly.GetExecutingAssembly());
         }
-
-        public static int Count(ThingDef tDef, Map map)
-        {
-            return tDef.CountAsResource
-                ? map.resourceCounter.GetCount(tDef)
-                : map.listerThings.ThingsOfDef(tDef).Count;
-        }
-
-       
     }
 
 }

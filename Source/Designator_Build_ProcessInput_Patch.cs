@@ -39,7 +39,7 @@ namespace StuffCount
                     if (option != null)
                     {
 
-                        int stuffCount = StuffCount.Count(localStuffDef, _Map);
+                        int stuffCount = Utils.Count(localStuffDef, _Map);
                         string labelCapNew = localStuffDef.LabelCap + " (" + stuffCount + ")";
 
                         option.Label = labelCapNew;
