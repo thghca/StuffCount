@@ -1,8 +1,8 @@
 <ModMetaData>
 	<name>StuffCount</name>
 	<author>TGC</author>
-	<targetVersion>0.17.0</targetVersion>
-	<description>v1.1
+	<targetVersion>0.18.0</targetVersion>
+	<description>v1.2
 Adds counters to thing filters and material select float menu.
 
 Can be added/removed at any time.	

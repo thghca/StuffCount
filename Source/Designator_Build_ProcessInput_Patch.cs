@@ -1,5 +1,6 @@
 ﻿using Harmony;
 using RimWorld;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -24,7 +25,7 @@ namespace StuffCount
             {
                 return;
             }
-            FloatMenu floatMenu = (FloatMenu)Find.WindowStack.Windows.SingleOrDefault(x => x.GetType() == typeof(FloatMenu)&&!x.GetType().IsSubclassOf(typeof(FloatMenu)));
+            FloatMenu floatMenu = (FloatMenu)Find.WindowStack.Windows.LastOrDefault(x => x.GetType() == typeof(FloatMenu)&&!x.GetType().IsSubclassOf(typeof(FloatMenu)));
             if (floatMenu == null) return;
             List<FloatMenuOption> optionsList = (List<FloatMenuOption>)AccessTools.Field(typeof(FloatMenu), "options").GetValue(floatMenu);
             foreach (ThingDef thingDef2 in _Map.resourceCounter.AllCountedAmounts.Keys)
@@ -33,8 +34,17 @@ namespace StuffCount
                 {
                     ThingDef localStuffDef = thingDef2;
                     string labelCap = localStuffDef.LabelCap;
-                   
-                    FloatMenuOption option = optionsList.SingleOrDefault(x => x.Label == labelCap);
+
+                    FloatMenuOption option;
+                    try
+                    {
+                        option = optionsList.SingleOrDefault(x => x.Label == labelCap);
+                    }
+                    catch (InvalidOperationException e)
+                    {
+                        option = null;
+                        Log.Warning("StuffCount: Two or more different stuff with same name " + labelCap + "!");
+                    }
 
                     if (option != null)
                     {
