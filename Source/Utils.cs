@@ -25,7 +25,7 @@ namespace StuffCount
         {
             if (!CanShowInfo(tDef))
             {
-                Messages.Message("Can't show info for this.",MessageSound.RejectInput);
+                Messages.Message("Can't show info for this.", MessageTypeDefOf.RejectInput);
                 return;
             }
 
@@ -38,7 +38,7 @@ namespace StuffCount
                 if (list.Count == 1) tDef = list[0];
                 else
                 {
-                    Messages.Message("Can't show info for this.", MessageSound.RejectInput);
+                    Messages.Message("Can't show info for this.", MessageTypeDefOf.RejectInput);
                     return;
                 }
             }
