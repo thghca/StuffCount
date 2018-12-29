@@ -33,24 +33,24 @@ namespace StuffCount
                 if (thingDef2.IsStuff && thingDef2.stuffProps.CanMake(thingDef) && (DebugSettings.godMode || _Map.listerThings.ThingsOfDef(thingDef2).Count > 0))
                 {
                     ThingDef localStuffDef = thingDef2;
-                    string labelCap = localStuffDef.LabelCap;
+                    string label = GenLabel.ThingLabel(_entDef, localStuffDef, 1).CapitalizeFirst();
 
                     FloatMenuOption option;
                     try
                     {
-                        option = optionsList.SingleOrDefault(x => x.Label == labelCap);
+                        option = optionsList.SingleOrDefault(x => x.Label == label);
                     }
                     catch (InvalidOperationException e)
                     {
                         option = null;
-                        Log.Warning("StuffCount: Two or more different stuff with same name " + labelCap + "!");
+                        Log.Warning("StuffCount: Two or more different stuff with same name " + label + "!");
                     }
 
                     if (option != null)
                     {
 
                         int stuffCount = Utils.Count(localStuffDef, _Map);
-                        string labelCapNew = localStuffDef.LabelCap + " (" + stuffCount + ")";
+                        string labelCapNew = label + " (" + stuffCount + ")";
 
                         option.Label = labelCapNew;
                     }

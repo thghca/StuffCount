@@ -33,8 +33,8 @@ namespace StuffCount
             {
                 //TODO: check inner thing for sculptures and furniture
                 List<ThingDef> list = (from def in DefDatabase<ThingDef>.AllDefs
-                                                   where def.minifiedDef == tDef
-                                                   select def).ToList();
+                                       where def.minifiedDef == tDef
+                                       select def).ToList();
                 if (list.Count == 1) tDef = list[0];
                 else
                 {
@@ -47,7 +47,7 @@ namespace StuffCount
             {
                 List<FloatMenuOption> list = new List<FloatMenuOption>();
 
-                var map = Find.VisibleMap;
+                var map = Find.CurrentMap;
                 var allThings = map?.listerThings?.ThingsOfDef(tDef);
 
                 foreach (var sDef in GenStuff.AllowedStuffsFor(tDef))

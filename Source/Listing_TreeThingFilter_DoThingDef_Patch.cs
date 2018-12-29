@@ -18,7 +18,7 @@ namespace StuffCount
         {
             
 
-            var map = Find.VisibleMap;
+            var map = Find.CurrentMap;
             int stuffCount = Utils.Count(tDef, map);
 
             var readjustedY = __instance.CurHeight - __instance.lineHeight - __instance.verticalSpacing;
@@ -30,7 +30,7 @@ namespace StuffCount
 
                 List<ThingDef> _suppressSmallVolumeTags = (List<ThingDef>)Traverse.Create(__instance).Field("suppressSmallVolumeTags").GetValue();
                 bool flag = (_suppressSmallVolumeTags == null || !_suppressSmallVolumeTags.Contains(tDef)) && tDef.IsStuff && tDef.smallVolume;
-                string count = stuffCount.ToString() + (flag ? ("x" + 10.ToStringCached()) : "");
+                string count = stuffCount.ToString() + (flag ? ("/" + 10.ToStringCached()) : "");
                 var size = Text.CalcSize(count);
                 float left = right - size.x;
 
